@@ -4,14 +4,16 @@ using GigHubNext.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GigHubNext.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190208142254_CreateGigsAndGenresTables")]
+    partial class CreateGigsAndGenresTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,9 +25,7 @@ namespace GigHubNext.Data.Migrations
                 {
                     b.Property<byte>("Id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -38,15 +38,13 @@ namespace GigHubNext.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ArtistId");
+                    b.Property<int?>("ArtistId");
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<byte>("GenreId");
+                    b.Property<byte?>("GenreId");
 
-                    b.Property<string>("Venue")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("Venue");
 
                     b.HasKey("Id");
 
@@ -65,8 +63,7 @@ namespace GigHubNext.Data.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Username")
-                        .IsRequired();
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 
@@ -242,13 +239,11 @@ namespace GigHubNext.Data.Migrations
                 {
                     b.HasOne("GigHubNext.Models.GigUser", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ArtistId");
 
                     b.HasOne("GigHubNext.Models.Genre", "Genre")
                         .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GenreId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

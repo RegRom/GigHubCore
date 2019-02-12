@@ -1,15 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace GigHubNext.Models
 {
-    public class GigUser
+    public class GigUser : IdentityUser
     {
-        public int Id { get; set; }
 
         [Required]
         public string Username { get; set; }
-
-        public string Email { get; set; }
 
     }
 }

@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GigHubNext.Models
 {
-    public class GigUser : IdentityUser
+    public sealed class GigUser : IdentityUser
     {
-
         [Required]
-        public string Username { get; set; }
-
+        [StringLength(100)]
+        public string Name { get; set; }
     }
 }

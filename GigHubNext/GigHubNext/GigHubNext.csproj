@@ -6,10 +6,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190208141712_CreateGigTable.cs" />
+    <Compile Remove="Data\Migrations\20190208141712_CreateGigTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190208142254_CreateGigsAndGenresTables.cs" />
+    <Compile Remove="Data\Migrations\20190208142254_CreateGigsAndGenresTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190208143354_OverrideMigrationsForModels.cs" />
+    <Compile Remove="Data\Migrations\20190208143354_OverrideMigrationsForModels.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190208143936_PopulateGenresTable.cs" />
+    <Compile Remove="Data\Migrations\20190208143936_PopulateGenresTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190213083622_CreateViewModified.cs" />
+    <Compile Remove="Data\Migrations\20190213083622_CreateViewModified.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190213085352_FixedUser.cs" />
+    <Compile Remove="Data\Migrations\20190213085352_FixedUser.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190213090020_NewDatabaseCreation.cs" />
+    <Compile Remove="Data\Migrations\20190213090020_NewDatabaseCreation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190213091110_MaybeFixedUser.cs" />
+    <Compile Remove="Data\Migrations\20190213091110_MaybeFixedUser.Designer.cs" />
+    <Compile Remove="Migrations\20190213092615_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190213092615_InitialMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.7" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

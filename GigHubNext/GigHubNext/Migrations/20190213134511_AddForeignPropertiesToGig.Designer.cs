@@ -4,14 +4,16 @@ using GigHubNext.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GigHubNext.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190213134511_AddForeignPropertiesToGig")]
+    partial class AddForeignPropertiesToGig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,9 +45,7 @@ namespace GigHubNext.Migrations
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<int>("GenreId");
-
-                    b.Property<byte?>("GenreId1");
+                    b.Property<byte>("GenreId");
 
                     b.Property<string>("Venue")
                         .IsRequired()
@@ -55,7 +55,7 @@ namespace GigHubNext.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.HasIndex("GenreId1");
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Gigs");
                 });
@@ -234,7 +234,8 @@ namespace GigHubNext.Migrations
 
                     b.HasOne("GigHubNext.Models.Genre", "Genre")
                         .WithMany()
-                        .HasForeignKey("GenreId1");
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

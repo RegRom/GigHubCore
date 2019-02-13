@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GigHubNext.Models;
 using Microsoft.AspNetCore.Mvc;
-using GigHubNext.Models;
+using System.Diagnostics;
+using System.Web.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace GigHubNext.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

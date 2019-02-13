@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GigHubNext.Models
 {
     public class Gig
     {
         public int Id { get; set; }
-        [Required]
 
-        public GigUser Artist { get; set; }
+        public IdentityUser Artist { get; set; }
+
+        [Required]
+        public string ArtistId { get; set; }
 
         public DateTime DateTime { get; set; }
 
@@ -16,7 +21,10 @@ namespace GigHubNext.Models
         [StringLength(255)]
         public string Venue { get; set; }
 
-        [Required]
         public Genre Genre { get; set; }
+
+        [Required]
+        [ForeignKey("Id")]
+        public int GenreId { get; set; }
     }
 }

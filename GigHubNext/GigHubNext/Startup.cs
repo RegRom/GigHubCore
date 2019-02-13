@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GigHubNext.Data;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GigHubNext.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -39,8 +34,19 @@ namespace GigHubNext
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddAuthentication(IISDefaults.AuthenticationScheme);
+            //services.AddAuthorization();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(
+            //config =>
+            //    {
+            //        var policy = new AuthorizationPolicyBuilder()
+            //            .RequireAuthenticatedUser()
+            //            .Build();
+            //        config.Filters.Add(new AuthorizeFilter(policy));
+            //    }
+             )
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +68,7 @@ namespace GigHubNext
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            
 
             app.UseMvc(routes =>
             {

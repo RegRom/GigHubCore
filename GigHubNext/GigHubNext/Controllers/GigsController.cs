@@ -4,7 +4,6 @@ using GigHubNext.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Security.Claims;
 
@@ -35,11 +34,10 @@ namespace GigHubNext.Controllers
         [HttpPost]
         public IActionResult Create(GigFormViewModel viewModel)
         {
-
             var gig = new Gig
             {
                 ArtistId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                DateTime = DateTime.Parse($"{viewModel.Date} {viewModel.Time}"),
+                DateTime = viewModel.DateTime,
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
             };

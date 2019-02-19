@@ -1,12 +1,11 @@
 ﻿using GigHubNext.Data;
-using GigHubNext.Models;
+using GigHubNext.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
-using GigHubNext.ViewModels;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace GigHubNext.Controllers
@@ -26,6 +25,7 @@ namespace GigHubNext.Controllers
         {
             var upcomingGigs = _dbContext.Gigs
                 .Include(g => g.Artist)
+                .Include(g => g.Genre)
                 .Where(g => g.DateTime > DateTime.Now);
 
             return View(upcomingGigs);

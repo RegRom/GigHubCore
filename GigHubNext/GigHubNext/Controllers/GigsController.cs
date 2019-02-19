@@ -2,7 +2,6 @@
 using GigHubNext.Models;
 using GigHubNext.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
@@ -12,7 +11,6 @@ namespace GigHubNext.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly UserManager<GigUser> _userManager;
 
         public GigsController(ApplicationDbContext dbContext)
         {

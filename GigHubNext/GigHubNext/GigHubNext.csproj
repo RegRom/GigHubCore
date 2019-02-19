@@ -26,6 +26,8 @@
     <Compile Remove="Data\Migrations\20190213091110_MaybeFixedUser.Designer.cs" />
     <Compile Remove="Migrations\20190213092615_InitialMigration.cs" />
     <Compile Remove="Migrations\20190213092615_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20190219144214_AddAttendance.cs" />
+    <Compile Remove="Migrations\20190219144214_AddAttendance.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Areas\Identity\Views\_Page_Areas_Identity_Pages_Account_Manage_Index_cshtml\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 

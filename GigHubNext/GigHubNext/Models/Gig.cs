@@ -7,6 +7,7 @@ namespace GigHubNext.Models
 {
     public class Gig
     {
+        [Key]
         public int Id { get; set; }
 
         public GigUser Artist { get; set; }

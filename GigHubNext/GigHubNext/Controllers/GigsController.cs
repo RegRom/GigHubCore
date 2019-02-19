@@ -12,7 +12,7 @@ namespace GigHubNext.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<GigUser> _userManager;
 
         public GigsController(ApplicationDbContext dbContext)
         {

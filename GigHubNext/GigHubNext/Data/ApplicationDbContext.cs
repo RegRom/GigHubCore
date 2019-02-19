@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GigHubNext.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<GigUser>
     {
         public DbSet<Gig> Gigs { get; set; }
         public DbSet<Genre> Genres { get; set; }

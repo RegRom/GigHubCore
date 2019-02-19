@@ -1,6 +1,4 @@
-using System;
-
-namespace GigHubNext.Models
+namespace GigHubNext.ViewModels
 {
     public class ErrorViewModel
     {

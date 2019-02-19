@@ -1,7 +1,12 @@
-﻿using GigHubNext.Models;
+﻿using GigHubNext.Data;
+using GigHubNext.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Web.Mvc;
+using GigHubNext.ViewModels;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace GigHubNext.Controllers
@@ -9,10 +14,21 @@ namespace GigHubNext.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        private ApplicationDbContext _dbContext;
+
+        public HomeController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            var upcomingGigs = _dbContext.Gigs
+                .Include(g => g.Artist)
+                .Where(g => g.DateTime > DateTime.Now);
+
+            return View(upcomingGigs);
         }
 
         public IActionResult About()

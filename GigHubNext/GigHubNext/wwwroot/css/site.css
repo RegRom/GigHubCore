@@ -40,17 +40,67 @@ body {
 
 .navbar-inverse {
     background-color: #ff4342;
-    border-color: #ff4342
+    border-color: #ff4342;
+    padding:                       
 }
 
 .navbar-inverse .navbar-nav > li > a {
     color: #ffffff;
 }
 
-    .navbar-inverse .navbar-brand {
-        color: #ffffff;
-    }
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
 
 body {
-    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 17px;
+    padding: 20px 15px;
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.form-control:focus {
+    border-color: royalblue; 
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.btn {
+    padding: 8px 20px;
+    font-size: 17px;
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+    color: #ffffff
+}
+
+.navbar-inverse .btn-link {
+    color: black;
+    padding: 3px 20px;
+}
+
+.navbar-inverse .btn-link:focus {
+    color: #000000;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #e41211;
+    background-color: rgba(228, 18, 17, 0.55);
+}
+
+.dropdown-menu {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.navbar-brand {
+    font-weight: 700;
 }

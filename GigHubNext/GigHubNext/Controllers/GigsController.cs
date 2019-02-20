@@ -3,6 +3,7 @@ using GigHubNext.Models;
 using GigHubNext.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security.Claims;
 
@@ -15,6 +16,27 @@ namespace GigHubNext.Controllers
         public GigsController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        [Authorize]
+        public IActionResult Attending()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var gigs = _dbContext.Attendances
+                .Where(a => a.AttendeeId == userId)
+                .Select(a => a.Gig)
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
+                .ToList();
+
+            var viewModel = new GigsViewModel()
+            {
+                UpcomingGigs = gigs,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Gigs I'm Attending"
+            };
+
+            return View("Gigs", viewModel);
         }
 
         [Authorize]

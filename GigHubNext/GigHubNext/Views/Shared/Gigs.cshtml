@@ -1,10 +1,12 @@
-﻿@model IEnumerable<GigHubNext.Models.Gig>
+﻿@using GigHubNext.Dtos
+@model GigHubNext.ViewModels.GigsViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 
-<ul class="gigs">
-    @foreach (var gig in Model)
+<h1>@Model.Heading</h1>
+<ul class="gigs voffset4">
+    @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
             <div class="date">
@@ -22,12 +24,16 @@
                 <span class="genre">
                     @gig.Genre.Name 
                 </span>
-                @*<button data-gig-id = "@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>*@
-                <form asp-controller="Attendances" asp-action="Attend" method="post">
+                @if (Model.ShowActions)
+                {
+                    <button data-gig-id = "@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                }
+                @*<form asp-controller="Attendances" asp-action="Attend" method="post">
                     <div class="form-group">
                         <input asp-route-id="@gig.Id" type="submit" class="btn btn-default btn-sm pull-right value="Attend" />
                     </div>
-                </form>
+                </form>*@
+
                 @*<button asp-controller="Attendances" asp-action="Attend" asp-route-id="@gig.Id" class="btn btn-default btn-sm pull-right ">Going?</button>*@
             </div>
         </li>
@@ -40,7 +46,7 @@
         $(document).ready(function() {
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/attendances", { GigId: button.attr("data-gig-id") })
+                $.post("/api/attendances", { "": button.attr("data-gig-id") })
                     .done(function() {
                         button
                             .removeClass("btn-default")

@@ -1,5 +1,4 @@
 ﻿using GigHubNext.Data;
-using GigHubNext.Dtos;
 using GigHubNext.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,16 +26,16 @@ namespace GigHubNext.Controllers
         
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        public IActionResult Attend(AttendanceDto dto)
+        public IActionResult Attend([FromBody] int gigId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == dto.GigId))
+            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == gigId))
                 return BadRequest("The attendance already exists.");
 
             var attendance = new Attendance
             {
-                GigId = dto.GigId,
+                GigId = gigId,
                 AttendeeId = userId
             };
             _dbContext.Attendances.Add(attendance);

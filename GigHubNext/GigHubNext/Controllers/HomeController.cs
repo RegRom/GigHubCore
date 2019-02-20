@@ -28,7 +28,14 @@ namespace GigHubNext.Controllers
                 .Include(g => g.Genre)
                 .Where(g => g.DateTime > DateTime.Now);
 
-            return View(upcomingGigs);
+            var viewModel = new GigsViewModel
+            {
+                UpcomingGigs = upcomingGigs,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Upcoming Gigs"
+            };
+
+            return View("Gigs", viewModel);
         }
 
         public IActionResult About()
@@ -56,4 +63,5 @@ namespace GigHubNext.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
 }

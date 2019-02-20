@@ -41,8 +41,7 @@ namespace GigHubNext.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: true)
+                    Name = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +52,8 @@ namespace GigHubNext.Migrations
                 name: "Genres",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 255, nullable: false)
                 },
                 constraints: table =>
@@ -176,7 +176,7 @@ namespace GigHubNext.Migrations
                     ArtistId = table.Column<string>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false),
                     Venue = table.Column<string>(maxLength: 255, nullable: false),
-                    GenreId = table.Column<byte>(nullable: false)
+                    GenreId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,6 +193,30 @@ namespace GigHubNext.Migrations
                         principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attendances",
+                columns: table => new
+                {
+                    GigId = table.Column<int>(nullable: false),
+                    AttendeeId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attendances", x => new { x.AttendeeId, x.GigId });
+                    table.ForeignKey(
+                        name: "FK_Attendances_AspNetUsers_AttendeeId",
+                        column: x => x.AttendeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Attendances_Gigs_GigId",
+                        column: x => x.GigId,
+                        principalTable: "Gigs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -235,6 +259,11 @@ namespace GigHubNext.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Attendances_GigId",
+                table: "Attendances",
+                column: "GigId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Gigs_ArtistId",
                 table: "Gigs",
                 column: "ArtistId");
@@ -263,10 +292,13 @@ namespace GigHubNext.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Gigs");
+                name: "Attendances");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Gigs");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

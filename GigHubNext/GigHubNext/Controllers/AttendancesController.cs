@@ -1,7 +1,9 @@
 ﻿using GigHubNext.Data;
+using GigHubNext.Dtos;
 using GigHubNext.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Security.Claims;
 using System.Web.Mvc;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
@@ -13,21 +15,29 @@ namespace GigHubNext.Controllers
     [Authorize]
     public class AttendancesController : ControllerBase
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<GigUser> _userManager;
 
-        public AttendancesController(ApplicationDbContext dbContext)
+        public AttendancesController(ApplicationDbContext dbContext, UserManager<GigUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
+        
+
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        public IActionResult Attend([FromBody] int gigId)
+        public IActionResult Attend(AttendanceDto dto)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == dto.GigId))
+                return BadRequest("The attendance already exists.");
+
             var attendance = new Attendance
             {
-                GigId = gigId,
-                AttendeeId = _userManager.GetUserId(ClaimsPrincipal.Current)
+                GigId = dto.GigId,
+                AttendeeId = userId
             };
             _dbContext.Attendances.Add(attendance);
             _dbContext.SaveChanges();

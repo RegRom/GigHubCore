@@ -34,7 +34,9 @@ namespace GigHubNext.Migrations
 
             modelBuilder.Entity("GigHubNext.Models.Genre", b =>
                 {
-                    b.Property<byte>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -58,8 +60,6 @@ namespace GigHubNext.Migrations
 
                     b.Property<int>("GenreId");
 
-                    b.Property<byte?>("GenreId1");
-
                     b.Property<string>("Venue")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -68,7 +68,7 @@ namespace GigHubNext.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.HasIndex("GenreId1");
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Gigs");
                 });
@@ -264,7 +264,8 @@ namespace GigHubNext.Migrations
 
                     b.HasOne("GigHubNext.Models.Genre", "Genre")
                         .WithMany()
-                        .HasForeignKey("GenreId1");
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

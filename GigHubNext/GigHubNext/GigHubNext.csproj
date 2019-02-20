@@ -26,8 +26,24 @@
     <Compile Remove="Data\Migrations\20190213091110_MaybeFixedUser.Designer.cs" />
     <Compile Remove="Migrations\20190213092615_InitialMigration.cs" />
     <Compile Remove="Migrations\20190213092615_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20190213092814_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190213092814_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20190213093215_PopulateGenresTable.cs" />
+    <Compile Remove="Migrations\20190213093215_PopulateGenresTable.Designer.cs" />
+    <Compile Remove="Migrations\20190213134511_AddForeignPropertiesToGig.cs" />
+    <Compile Remove="Migrations\20190213134511_AddForeignPropertiesToGig.Designer.cs" />
+    <Compile Remove="Migrations\20190213140554_KeyAnnotationsAdded.cs" />
+    <Compile Remove="Migrations\20190213140554_KeyAnnotationsAdded.Designer.cs" />
+    <Compile Remove="Migrations\20190219114214_AddNameToApplicationUser.cs" />
+    <Compile Remove="Migrations\20190219114214_AddNameToApplicationUser.Designer.cs" />
     <Compile Remove="Migrations\20190219144214_AddAttendance.cs" />
     <Compile Remove="Migrations\20190219144214_AddAttendance.Designer.cs" />
+    <Compile Remove="Migrations\20190219151001_AddAttendance.cs" />
+    <Compile Remove="Migrations\20190219151001_AddAttendance.Designer.cs" />
+    <Compile Remove="Migrations\20190220120002_FixedGenreConstraint.cs" />
+    <Compile Remove="Migrations\20190220120002_FixedGenreConstraint.Designer.cs" />
+    <Compile Remove="Migrations\20190220120842_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190220120842_InitialMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

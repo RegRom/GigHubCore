@@ -23,19 +23,16 @@ namespace GigHubNext.Controllers
             _userManager = userManager;
         }
 
-        
-
-        [Microsoft.AspNetCore.Mvc.HttpPost]
-        public IActionResult Attend([FromBody] int gigId)
+        public IActionResult Attend(int? id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == gigId))
+            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == id))
                 return BadRequest("The attendance already exists.");
 
             var attendance = new Attendance
             {
-                GigId = gigId,
+                GigId = (int)id,
                 AttendeeId = userId
             };
             _dbContext.Attendances.Add(attendance);

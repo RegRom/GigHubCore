@@ -24,17 +24,14 @@
                 <span class="genre">
                     @gig.Genre.Name 
                 </span>
-                @if (Model.ShowActions)
+                @*@if (Model.ShowActions)
                 {
                     <button data-gig-id = "@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                }*@
+                @if (Model.ShowActions)
+                {
+                    <a asp-controller="Attendances" asp-action="Attend" asp-route-id="@gig.Id" class="btn btn-default btn-sm pull-right ">Going?</a>
                 }
-                @*<form asp-controller="Attendances" asp-action="Attend" method="post">
-                    <div class="form-group">
-                        <input asp-route-id="@gig.Id" type="submit" class="btn btn-default btn-sm pull-right value="Attend" />
-                    </div>
-                </form>*@
-
-                @*<button asp-controller="Attendances" asp-action="Attend" asp-route-id="@gig.Id" class="btn btn-default btn-sm pull-right ">Going?</button>*@
             </div>
         </li>
     }

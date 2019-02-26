@@ -59,4 +59,8 @@
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TagHelpersLib\TagHelpersLib.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -27,18 +27,21 @@ namespace GigHubNext.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == id))
-                return BadRequest("The attendance already exists.");
-
             var attendance = new Attendance
             {
                 GigId = (int)id,
                 AttendeeId = userId
             };
-            _dbContext.Attendances.Add(attendance);
+
+            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.GigId == id))
+                _dbContext.Attendances.Remove(attendance);
+
+            else
+                _dbContext.Attendances.Add(attendance);
+
             _dbContext.SaveChanges();
 
-            return Ok();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

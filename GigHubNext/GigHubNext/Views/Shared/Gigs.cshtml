@@ -30,29 +30,40 @@
                 }*@
                 @if (Model.ShowActions)
                 {
-                    <a asp-controller="Attendances" asp-action="Attend" asp-route-id="@gig.Id" class="btn btn-default btn-sm pull-right ">Going?</a>
+                    <a asp-controller="Attendances" asp-action="Attend" asp-route-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</a>
+                    @*<attendance asp-controller="Attendances" asp-action="Attend" asp-route-id="@gig.Id"></attendance>*@
                 }
             </div>
         </li>
     }
 </ul>
 
+<attendance></attendance>
+
 @section scripts
 {
     <script>
+        //var isClicked = false;
+
+        //function toggleAttendance(isClicked) {
+        //    if (isClicked) {
+        //        .addClass("btn-default")
+        //    }
+        //}
+
         $(document).ready(function() {
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/attendances", { "": button.attr("data-gig-id") })
-                    .done(function() {
+                //$.post("/api/attendances", { "": button.attr("data-gig-id") })
+                    //.done(function() {
                         button
                             .removeClass("btn-default")
                             .addClass("btn-info")
                             .text("Going");
-                    })
-                    .fail(function() {
-                        alert("Something failed!");
-                    });
+                    //})
+                    //.fail(function() {
+                    //    alert("Something failed!");
+                    //});
             });
         });
     </script>
